@@ -16,7 +16,7 @@ pipeline {
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
-        SONARSCANNER = 'sonarsacnner'
+        SONARSCANNER = 'sonarscanner'
     }
 
     stages {
@@ -48,7 +48,7 @@ pipeline {
 
         stage('Sonar Analysis') {
             environment{
-                sacannerHome = tool "${SONARSCANNER}"
+                scannerHome = tool "${SONARSCANNER}"
             }
             steps{
                 withSonarQubeEnv("${SONARSERVER}") {
