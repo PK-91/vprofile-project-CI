@@ -16,6 +16,8 @@ pipeline {
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        // Add SONAR_SCANNER_OPTS environment variable
+        SONAR_SCANNER_OPTS = '-Djava.security.debug=access --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED'
     }
     stages {
         stage('Build'){
@@ -47,9 +49,6 @@ pipeline {
                 withSonarQubeEnv("${SONARSERVER}") {
                     sh '''
                         ${scannerHome}/bin/sonar-scanner \
-                        -Djava.security.debug=access \
-                        --add-opens=java.base/java.lang=ALL-UNNAMED \
-                        --add-opens=java.base/java.util=ALL-UNNAMED \
                         -Dsonar.projectKey=vprofile \
                         -Dsonar.projectName=vprofile \
                         -Dsonar.projectVersion=1.0 \
